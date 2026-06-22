@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Susan Trajes de Baño — Propuesta Inicial · PRDR</title>
+<style>
+:root {
+  --teal:  #1BA8CE;
+  --navy:  #1C2B4A;
+  --coral: #C8506A;
+  --coral-light: #FFF0F3;
+  --teal-light:  #EAF6FB;
+  --gray:  #F4F5F7;
+  --white: #FFFFFF;
+  --text:  #2D2D2D;
+  --muted: #777;
+  --border:#E0E0E0;
+  --green: #2E7D32;
+  --radius: 12px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+* { box-sizing: border-box; margin:0; padding:0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+  background: var(--gray);
+  color: var(--text);
+  line-height: 1.65;
+  font-size: 15px;
+}
+
+/* ── HEADER ─────────────────────────────────────────────────────────── */
+.header {
+  background: var(--navy);
+  color: white;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  max-width: 780px;
+  margin: 0 auto;
+}
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo-box {
+  width: 36px; height: 36px;
+  background: var(--teal);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 13px; color: white; letter-spacing: -0.5px;
+}
+.logo-text { font-size: 13px; opacity: 0.85; line-height: 1.2; }
+.logo-text strong { display: block; font-size: 15px; opacity: 1; }
+.header-right { font-size: 12px; opacity: 0.7; text-align: right; }
+
+/* ── PROGRESS BAR ───────────────────────────────────────────────────── */
+.progress-bar {
+  background: rgba(255,255,255,0.15);
+  height: 3px;
+}
+.progress-fill {
+  height: 3px;
+  background: var(--teal);
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
+/* ── HERO ───────────────────────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, #2a4a6e 100%);
+  color: white;
+  padding: 48px 20px 40px;
+  text-align: center;
+}
+.hero-badge {
+  display: inline-block;
+  background: var(--teal);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-size: clamp(22px, 5vw, 32px);
+  font-weight: 800;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.hero h1 span { color: var(--teal); }
+.hero p {
+  font-size: 15px;
+  opacity: 0.8;
+  max-width: 520px;
+  margin: 12px auto 0;
+}
+
+/* ── MAIN CONTAINER ─────────────────────────────────────────────────── */
+.container {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+}
+
+/* ── INTRO CARD ─────────────────────────────────────────────────────── */
+.intro-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--teal);
+}
+.intro-card h2 {
+  font-size: 17px;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+.intro-card p { font-size: 14px; color: var(--muted); margin-bottom: 8px; }
+.intro-card p:last-child { margin-bottom: 0; }
+
+.obj-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+.obj-item {
+  background: var(--teal-light);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: var(--navy);
+  display: flex; align-items: flex-start; gap: 8px;
+}
+.obj-item::before { content: "✓"; color: var(--teal); font-weight: 700; flex-shrink: 0; }
+
+/* ── SECTION ────────────────────────────────────────────────────────── */
+.section {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  user-select: none;
+}
+.section-header:hover { background: var(--gray); }
+.section-num {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--teal);
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.section-title { flex: 1; }
+.section-title h3 { font-size: 16px; color: var(--navy); }
+.section-title p  { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.section-arrow {
+  color: var(--muted);
+  font-size: 18px;
+  transition: transform 0.3s;
+}
+.section-body { padding: 20px; display: block; }
+.section.collapsed .section-body { display: none; }
+.section.collapsed .section-arrow { transform: rotate(-90deg); }
+
+/* ── QUESTION ───────────────────────────────────────────────────────── */
+.question { margin-bottom: 24px; }
+.question:last-child { margin-bottom: 0; }
+.q-label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--navy);
+  margin-bottom: 10px;
+  display: flex; align-items: flex-start; gap: 6px;
+}
+.q-label .dot {
+  width: 6px; height: 6px;
+  background: var(--coral);
+  border-radius: 50%;
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+
+/* Radio & Checkbox groups */
+.options-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.opt-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text);
+  background: white;
+  transition: all 0.15s;
+  user-select: none;
+}
+.opt-btn:hover { border-color: var(--teal); background: var(--teal-light); }
+.opt-btn.selected {
+  border-color: var(--teal);
+  background: var(--teal-light);
+  color: var(--navy);
+  font-weight: 600;
+}
+.opt-btn.selected-coral {
+  border-color: var(--coral);
+  background: var(--coral-light);
+  color: var(--navy);
+  font-weight: 600;
+}
+.opt-btn input { display: none; }
+
+/* Text input */
+.q-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  transition: border-color 0.2s;
+  background: white;
+}
+.q-input:focus { outline: none; border-color: var(--teal); }
+textarea.q-input { resize: vertical; min-height: 80px; }
+
+.q-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 20px 0;
+}
+
+/* ── ETAPAS ─────────────────────────────────────────────────────────── */
+.etapas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+.etapa-card {
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  background: white;
+}
+.etapa-card .et-num {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--teal);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.etapa-card h4 { font-size: 14px; color: var(--navy); margin-bottom: 6px; }
+.etapa-card p  { font-size: 12px; color: var(--muted); }
+
+/* ── SUBMIT SECTION ─────────────────────────────────────────────────── */
+.submit-section {
+  background: var(--navy);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  color: white;
+  text-align: center;
+  margin-top: 24px;
+}
+.submit-section h3 { font-size: 20px; margin-bottom: 8px; }
+.submit-section p  { font-size: 14px; opacity: 0.8; margin-bottom: 20px; }
+
+.btn-wp {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #25D366;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 14px 28px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  box-shadow: 0 4px 16px rgba(37,211,102,0.4);
+}
+.btn-wp:hover { background: #1ebe5d; transform: translateY(-2px); }
+.btn-wp svg { width: 22px; height: 22px; fill: white; flex-shrink: 0; }
+
+.btn-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: rgba(255,255,255,0.7);
+  font-size: 13px;
+  padding: 10px 16px;
+  border-radius: 50px;
+  border: 1px solid rgba(255,255,255,0.3);
+  cursor: pointer;
+  margin-top: 12px;
+  transition: all 0.2s;
+}
+.btn-copy:hover { background: rgba(255,255,255,0.1); color: white; }
+
+.copy-success {
+  display: none;
+  color: #25D366;
+  font-size: 13px;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+/* ── FOOTER ─────────────────────────────────────────────────────────── */
+footer {
+  background: var(--navy);
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  font-size: 12px;
+  padding: 20px;
+  margin-top: 0;
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .header-right { display: none; }
+  .container { padding: 16px 12px 60px; }
+  .section-body { padding: 16px; }
+  .hero { padding: 36px 16px 32px; }
+  .obj-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-box">prdr</div>
+      <div class="logo-text">
+        <strong>PRDR</strong>
+        Comunicación Estratégica
+      </div>
+    </div>
+    <div class="header-right">
+      Gálvez · Santa Fe<br>
+      (3404) 504450
+    </div>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Propuesta inicial · Junio 2026</div>
+  <h1>Susan <span>Trajes de Baño</span></h1>
+  <p>Antes de arrancar, necesitamos conocer tu negocio. Completá este formulario y nos da la base para armar una propuesta a tu medida.</p>
+</div>
+
+<!-- CONTAINER -->
+<div class="container">
+
+  <!-- INTRO CARD -->
+  <div class="intro-card">
+    <h2>¿Para qué sirve esto?</h2>
+    <p>Este formulario reemplaza la reunión inicial de diagnóstico. Con tus respuestas podemos definir exactamente qué estructura digital necesita el taller, sin proponer de más ni de menos.</p>
+    <p>No hay respuestas incorrectas. Todo lo que contés nos ayuda a trabajar mejor.</p>
+    <div class="obj-grid">
+      <div class="obj-item">Presentarse de manera profesional</div>
+      <div class="obj-item">Mostrar los productos con claridad</div>
+      <div class="obj-item">Recibir consultas organizadas</div>
+      <div class="obj-item">Armar canal de venta online</div>
+      <div class="obj-item">Prepararse para crecer por temporada</div>
+      <div class="obj-item">Convertir el boca a boca en ventas digitales</div>
+    </div>
+  </div>
+
+  <!-- ── SECCIÓN 1: PRODUCTO ─────────────────────────────────────────── -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')">
+      <div class="section-num">1</div>
+      <div class="section-title">
+        <h3>Sobre el producto</h3>
+        <p>Qué hacen y cómo lo hacen</p>
+      </div>
+      <div class="section-arrow">▾</div>
+    </div>
+    <div class="section-body">
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Qué líneas de mallas confeccionan?</div>
+        <div class="options-grid" data-type="checkbox" data-name="lineas">
+          <label class="opt-btn"><input type="checkbox" value="Juvenil">Juvenil</label>
+          <label class="opt-btn"><input type="checkbox" value="Clásica">Clásica</label>
+          <label class="opt-btn"><input type="checkbox" value="Deportiva">Deportiva</label>
+          <label class="opt-btn"><input type="checkbox" value="Reductora">Reductora</label>
+          <label class="opt-btn"><input type="checkbox" value="Talles especiales">Talles especiales</label>
+          <label class="opt-btn"><input type="checkbox" value="Personalizada / a medida">Personalizada / a medida</label>
+        </div>
+      </div>
+
+      <div class="q-divider"></div>
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Trabajan con modelos propios, a pedido o ambos?</div>
+        <div class="options-grid" data-type="radio" data-name="modelos">
+          <label class="opt-btn"><input type="radio" name="modelos" value="Modelos propios">Modelos propios</label>
+          <label class="opt-btn"><input type="radio" name="modelos" value="Solo a pedido">Solo a pedido</label>
+          <label class="opt-btn"><input type="radio" name="modelos" value="Ambos">Ambos</label>
+        </div>
+      </div>
+
+      <div class="q-divider"></div>
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Tienen talles definidos? ¿Cuáles ofrecen?</div>
+        <div class="options-grid" data-type="radio" data-name="talles_def">
+          <label class="opt-btn"><input type="radio" name="talles_def" value="Sí, talles fijos">Sí, talles fijos</label>
+          <label class="opt-btn"><input type="radio" name="talles_def" value="Solo a medida">Solo a medida</label>
+          <label class="opt-btn"><input type="radio" name="talles_def" value="Fijos + a medida">Fijos + a medida</label>
+        </div>
+        <input type="text" class="q-input" style="margin-top:10px" data-name="talles_cuales" placeholder="¿Cuáles talles? Ej: S, M, L, XL, hasta talle 56…">
+      </div>
+
+      <div class="q-divider"></div>
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Cuál es el producto más vendido y cuál deja mejor margen?</div>
+        <input type="text" class="q-input" data-name="prod_mas_vendido" placeholder="Producto más vendido">
+        <input type="text" class="q-input" style="margin-top:8px" data-name="prod_mejor_margen" placeholder="Producto con mejor margen de ganancia">
+      </div>
+
+      <div class="q-divider"></div>
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Qué tiene tu malla que una clienta valora cuando te vuelve a comprar?</div>
+        <textarea class="q-input" data-name="diferencial_producto" placeholder="Calce, tela, comodidad, precio, talles, confección artesanal…"></textarea>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── SECCIÓN 2: PRODUCCIÓN ───────────────────────────────────────── -->
+  <div class="section collapsed" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')">
+      <div class="section-num">2</div>
+      <div class="section-title">
+        <h3>Sobre la producción</h3>
+        <p>Capacidad y tiempos del taller</p>
+      </div>
+      <div class="section-arrow">▾</div>
+    </div>
+    <div class="section-body">
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Trabajan con stock o solo por pedido?</div>
+        <div class="options-grid" data-type="radio" data-name="stock_pedido">
+          <label class="opt-btn"><input type="radio" name="stock_pedido" value="Stock">Tenemos stock</label>
+          <label class="opt-btn"><input type="radio" name="stock_pedido" value="Solo pedido">Solo a pedido</label>
+          <label class="opt-btn"><input type="radio" name="stock_pedido" value="Stock + pedido">Las dos cosas</label>
+        </div>
+      </div>
+
+      <div class="q-divider"></div>
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Cuántas mallas pueden producir por semana o por mes?</div>
+        <input type="text" class="q-input" data-name="capacidad_produccion" placeholder="Ej: 20 por semana, 80 por mes…">
+      </div>
+
+      <div class="q-divider"></div>
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Qué tiempos de entrega manejan habitualmente?</div>
+        <input type="text" class="q-input" data-name="tiempos_entrega" placeholder="Ej: 5 días hábiles, 2 semanas…">
+      </div>
+
+      <div class="q-divider"></div>
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> Si empiezan a llegar más consultas, ¿pueden producir más?</div>
+        <div class="options-grid" data-type="radio" data-name="puede_crecer">
+          <label class="opt-btn"><input type="radio" name="puede_crecer" value="Sí, con facilidad">Sí, fácilmente</label>
+          <label class="opt-btn"><input type="radio" name="puede_crecer" value="Sí, con ayuda extra">Sí, con ayuda extra</label>
+          <label class="opt-btn"><input type="radio" name="puede_crecer" value="Estamos al límite">Estamos al límite</label>
+        </div>
+      </div>
+
+      <div class="q-divider"></div>
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Tienen proveedores estables de telas y avíos?</div>
+        <div class="options-grid" data-type="radio" data-name="proveedores">
+          <label class="opt-btn"><input type="radio" name="proveedores" value="Sí, estables">Sí, estables</label>
+          <label class="opt-btn"><input type="radio" name="proveedores" value="A veces escasean">A veces escasean</label>
+          <label class="opt-btn"><input type="radio" name="proveedores" value="Es un problema frecuente">Es un problema</label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── SECCIÓN 3: VENTAS ───────────────────────────────────────────── -->
+  <div class="section collapsed" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')">
+      <div class="section-num">3</div>
+      <div class="section-title">
+        <h3>Sobre las ventas actuales</h3>
+        <p>Cómo llegan las clientas hoy</p>
+      </div>
+      <div class="section-arrow">▾</div>
+    </div>
+    <div class="section-body">
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Cómo llegan hoy las clientas? (podés elegir varias)</div>
+        <div class="options-grid" data-type="checkbox" data-name="como_llegan">
+          <label class="opt-btn"><input type="checkbox" value="Recomendación / boca a boca">Recomendación</label>
+          <label class="opt-btn"><input type="checkbox" value="WhatsApp">WhatsApp</label>
+          <label class="opt-btn"><input type="checkbox" value="Instagram">Instagram</label>
+          <label class="opt-btn"><input type="checkbox" value="Facebook">Facebook</label>
+          <label class="opt-btn"><input type="checkbox" value="Taller / local presencial">Taller presencial</label>
+          <label class="opt-btn"><input type="checkbox" value="Otra">Otra</label>
+        </div>
+      </div>
+
+      <div class="q-divider"></div>
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Dónde venden actualmente?</div>
+        <div class="options-grid" data-type="checkbox" data-name="donde_venden">
+          <label class="opt-btn"><input type="checkbox" value="Solo Barrancas">Solo Barrancas</label>
+          <label class="opt-btn"><input type="checkbox" value="Zona aledaña">Zona aledaña</label>
+          <label class="opt-btn"><input type="checkbox" value="Santa Fe capital">Santa Fe capital</label>
+          <label class="opt-btn"><input type="checkbox" value="Toda la provincia">Toda la provincia</label>
+          <label class="opt-btn"><input type="checkbox" value="Otras provincias">Otras provincias</label>
+        </div>
+      </div>
+
+      <div class="q-divider"></div>
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Hacen envíos?</div>
+        <div class="options-grid" data-type="radio" data-name="envios">
+          <label class="opt-btn"><input type="radio" name="envios" value="Sí, siempre">Sí, siempre</label>
+          <label class="opt-btn"><input type="radio" name="envios" value="A veces">A veces</label>
+          <label class="opt-btn"><input type="radio" name="envios" value="No, solo local">No, solo local</label>
+        </div>
+      </div>
+
+      <div class="q-divider"></div>
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Venden por menor, por mayor o ambas modalidades?</div>
+        <div class="options-grid" data-type="radio" data-name="mayor_menor">
+          <label class="opt-btn"><input type="radio" name="mayor_menor" value="Solo minorista">Solo minorista</label>
+          <label class="opt-btn"><input type="radio" name="mayor_menor" value="Solo mayorista">Solo mayorista</label>
+          <label class="opt-btn"><input type="radio" name="mayor_menor" value="Ambas">Ambas</label>
+        </div>
+      </div>
+
+      <div class="q-divider"></div>
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Cuál es el precio promedio de una malla? ¿Y el más caro?</div>
+        <input type="text" class="q-input" data-name="ticket_promedio" placeholder="Precio promedio, ej: $18.000">
+        <input type="text" class="q-input" style="margin-top:8px" data-name="ticket_max" placeholder="Precio más alto que venden, ej: $35.000">
+      </div>
+
+      <div class="q-divider"></div>
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿En qué meses venden más? ¿Cuándo arranca la temporada?</div>
+        <div class="options-grid" data-type="checkbox" data-name="meses_pico">
+          <label class="opt-btn"><input type="checkbox" value="Septiembre">Sep</label>
+          <label class="opt-btn"><input type="checkbox" value="Octubre">Oct</label>
+          <label class="opt-btn"><input type="checkbox" value="Noviembre">Nov</label>
+          <label class="opt-btn"><input type="checkbox" value="Diciembre">Dic</label>
+          <label class="opt-btn"><input type="checkbox" value="Enero">Ene</label>
+          <label class="opt-btn"><input type="checkbox" value="Febrero">Feb</label>
+          <label class="opt-btn"><input type="checkbox" value="Marzo">Mar</label>
+        </div>
+        <input type="text" class="q-input" style="margin-top:10px" data-name="temporada_obs" placeholder="¿Alguna observación sobre la temporada?">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── SECCIÓN 4: MARCA ────────────────────────────────────────────── -->
+  <div class="section collapsed" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')">
+      <div class="section-num">4</div>
+      <div class="section-title">
+        <h3>Sobre la marca</h3>
+        <p>Identidad visual y valores</p>
+      </div>
+      <div class="section-arrow">▾</div>
+    </div>
+    <div class="section-body">
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Tienen logo?</div>
+        <div class="options-grid" data-type="radio" data-name="tiene_logo">
+          <label class="opt-btn"><input type="radio" name="tiene_logo" value="Sí, uno profesional">Sí, profesional</label>
+          <label class="opt-btn"><input type="radio" name="tiene_logo" value="Sí, pero básico">Sí, pero básico</label>
+          <label class="opt-btn"><input type="radio" name="tiene_logo" value="No tenemos logo">No tenemos</label>
+        </div>
+      </div>
+
+      <div class="q-divider"></div>
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Tienen colores, tipografía o estilo visual definido?</div>
+        <div class="options-grid" data-type="radio" data-name="tiene_identidad">
+          <label class="opt-btn"><input type="radio" name="tiene_identidad" value="Sí, está definido">Sí, definido</label>
+          <label class="opt-btn"><input type="radio" name="tiene_identidad" value="Más o menos">Más o menos</label>
+          <label class="opt-btn"><input type="radio" name="tiene_identidad" value="No, nada definido">No</label>
+        </div>
+      </div>
+
+      <div class="q-divider"></div>
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Qué valores o sensaciones querés que transmita Susan? (elegí los que sientas)</div>
+        <div class="options-grid" data-type="checkbox" data-name="valores_marca">
+          <label class="opt-btn"><input type="checkbox" value="Comodidad">Comodidad</label>
+          <label class="opt-btn"><input type="checkbox" value="Elegancia">Elegancia</label>
+          <label class="opt-btn"><input type="checkbox" value="Seguridad">Seguridad</label>
+          <label class="opt-btn"><input type="checkbox" value="Diseño propio">Diseño propio</label>
+          <label class="opt-btn"><input type="checkbox" value="Talles reales">Talles reales</label>
+          <label class="opt-btn"><input type="checkbox" value="Confección artesanal">Artesanal</label>
+          <label class="opt-btn"><input type="checkbox" value="Moda y tendencia">Moda</label>
+          <label class="opt-btn"><input type="checkbox" value="Calidad de tela">Calidad</label>
+          <label class="opt-btn"><input type="checkbox" value="Precio accesible">Precio accesible</label>
+          <label class="opt-btn"><input type="checkbox" value="Exclusividad">Exclusividad</label>
+        </div>
+      </div>
+
+      <div class="q-divider"></div>
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Qué diferencia a Susan de otras marcas o talleres de mallas?</div>
+        <textarea class="q-input" data-name="diferencial_marca" placeholder="Acá puede salir el mensaje clave de la marca. ¡Sé específica!"></textarea>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── SECCIÓN 5: PRESENCIA DIGITAL ───────────────────────────────── -->
+  <div class="section collapsed" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')">
+      <div class="section-num">5</div>
+      <div class="section-title">
+        <h3>Sobre la presencia digital actual</h3>
+        <p>Qué tienen hoy, qué falta</p>
+      </div>
+      <div class="section-arrow">▾</div>
+    </div>
+    <div class="section-body">
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Cuáles de estas herramientas ya tienen?</div>
+        <div class="options-grid" data-type="checkbox" data-name="herramientas_actuales">
+          <label class="opt-btn"><input type="checkbox" value="Instagram">Instagram</label>
+          <label class="opt-btn"><input type="checkbox" value="Facebook">Facebook</label>
+          <label class="opt-btn"><input type="checkbox" value="WhatsApp Business">WhatsApp Business</label>
+          <label class="opt-btn"><input type="checkbox" value="Catálogo digital">Catálogo digital</label>
+          <label class="opt-btn"><input type="checkbox" value="Tienda online">Tienda online</label>
+          <label class="opt-btn"><input type="checkbox" value="Ninguna">Ninguna todavía</label>
+        </div>
+      </div>
+
+      <div class="q-divider"></div>
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Qué tipo de fotos tienen de los productos?</div>
+        <div class="options-grid" data-type="radio" data-name="tipo_fotos">
+          <label class="opt-btn"><input type="radio" name="tipo_fotos" value="Fotos profesionales">Profesionales</label>
+          <label class="opt-btn"><input type="radio" name="tipo_fotos" value="Fotos con celular (buenas)">Con celular (buenas)</label>
+          <label class="opt-btn"><input type="radio" name="tipo_fotos" value="Fotos informales">Informales / mejorar</label>
+          <label class="opt-btn"><input type="radio" name="tipo_fotos" value="No tenemos fotos de producto">No tenemos</label>
+        </div>
+      </div>
+
+      <div class="q-divider"></div>
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Tienen videos mostrando los productos o el proceso de confección?</div>
+        <div class="options-grid" data-type="radio" data-name="tiene_videos">
+          <label class="opt-btn"><input type="radio" name="tiene_videos" value="Sí, varios">Sí, varios</label>
+          <label class="opt-btn"><input type="radio" name="tiene_videos" value="Alguno suelto">Alguno suelto</label>
+          <label class="opt-btn"><input type="radio" name="tiene_videos" value="No tenemos">No tenemos</label>
+        </div>
+      </div>
+
+      <div class="q-divider"></div>
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Alguna vez hicieron publicidad paga (Instagram Ads, Facebook Ads)?</div>
+        <div class="options-grid" data-type="radio" data-name="publicidad_paga">
+          <label class="opt-btn"><input type="radio" name="publicidad_paga" value="Sí, con buenos resultados">Sí, con buenos resultados</label>
+          <label class="opt-btn"><input type="radio" name="publicidad_paga" value="Sí, pero sin resultados claros">Sí, sin resultados claros</label>
+          <label class="opt-btn"><input type="radio" name="publicidad_paga" value="No, nunca">No, nunca</label>
+        </div>
+      </div>
+
+      <div class="q-divider"></div>
+
+      <div class="question">
+        <div class="q-label"><span class="dot"></span> ¿Hay algo más que quieras contarnos sobre el negocio?</div>
+        <textarea class="q-input" data-name="comentario_libre" placeholder="Cualquier cosa que sientas importante: proyectos, miedos, metas, historia del taller…" style="min-height:100px"></textarea>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── LAS ETAPAS (informativo) ───────────────────────────────────── -->
+  <div class="section collapsed" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')">
+      <div class="section-num" style="background:var(--coral)">★</div>
+      <div class="section-title">
+        <h3>¿Cómo trabajamos?</h3>
+        <p>Las etapas del proceso</p>
+      </div>
+      <div class="section-arrow">▾</div>
+    </div>
+    <div class="section-body">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:16px">Según tus respuestas definimos qué etapas tiene sentido arrancar primero. Estas son las posibles:</p>
+      <div class="etapas-grid">
+        <div class="etapa-card">
+          <div class="et-num">Etapa 1</div>
+          <h4>Ordenamiento de marca</h4>
+          <p>Logo, paleta de colores, tono y mensajes clave.</p>
+        </div>
+        <div class="etapa-card">
+          <div class="et-num">Etapa 2</div>
+          <h4>Redes sociales</h4>
+          <p>Instagram, Facebook, bio, portadas y esquema de contenidos.</p>
+        </div>
+        <div class="etapa-card">
+          <div class="et-num">Etapa 3</div>
+          <h4>WhatsApp Business</h4>
+          <p>Catálogo, mensajes automáticos y organización de consultas.</p>
+        </div>
+        <div class="etapa-card">
+          <div class="et-num">Etapa 4</div>
+          <h4>Tienda online</h4>
+          <p>Catálogo digital o tienda completa con carrito y pagos.</p>
+        </div>
+        <div class="etapa-card">
+          <div class="et-num">Etapa 5</div>
+          <h4>Contenido inicial</h4>
+          <p>Fotos, videos y piezas para redes que generen confianza y deseo.</p>
+        </div>
+        <div class="etapa-card">
+          <div class="et-num">Etapa 6</div>
+          <h4>Campaña de lanzamiento</h4>
+          <p>Publicidad paga segmentada para arrancar la temporada.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ENVIAR ──────────────────────────────────────────────────────── -->
+  <div class="submit-section">
+    <h3>¡Ya terminaste! 🎉</h3>
+    <p>Tocá el botón y las respuestas se van directo a nuestro WhatsApp. En menos de 48 horas te mandamos una propuesta concreta.</p>
+    <button class="btn-wp" onclick="enviarWP()">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.015.496 3.916 1.374 5.591L0 24l6.592-1.334A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.805 9.805 0 01-5.006-1.369l-.359-.214-3.717.752.784-3.617-.235-.372A9.794 9.794 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg>
+      Enviar respuestas por WhatsApp
+    </button>
+    <br>
+    <button class="btn-copy" onclick="copiarRespuestas()">
+      📋 Copiar respuestas al portapapeles
+    </button>
+    <div class="copy-success" id="copySuccess">¡Copiado! Pegalo en un mensaje o email.</div>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  PRDR Comunicación Estratégica · Rivadavia 587, Gálvez, Santa Fe · (3404) 504450 · prdiegoneyra@gmail.com
+</footer>
+
+<script>
+// ── TOGGLE SECTION ─────────────────────────────────────────────────────────
+function toggleSection(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('collapsed');
+}
+
+// ── CHECKBOX / RADIO BUTTONS VISUAL ────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.options-grid').forEach(grid => {
+    const type = grid.dataset.type;
+    grid.querySelectorAll('.opt-btn').forEach(btn => {
+      const input = btn.querySelector('input');
+      input.addEventListener('change', () => {
+        if (type === 'radio') {
+          grid.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+          if (input.checked) btn.classList.add('selected');
+        } else {
+          btn.classList.toggle('selected', input.checked);
+        }
+        updateProgress();
+      });
+    });
+  });
+});
+
+// ── PROGRESS BAR ───────────────────────────────────────────────────────────
+function updateProgress() {
+  const allInputs = document.querySelectorAll('input[type=radio]:checked, input[type=checkbox]:checked, .q-input');
+  const filled = Array.from(allInputs).filter(i => {
+    if (i.tagName === 'INPUT' && i.type === 'text') return i.value.trim().length > 0;
+    if (i.tagName === 'TEXTAREA') return i.value.trim().length > 0;
+    return true;
+  }).length;
+  const total = 30; // approx total answers expected
+  const pct = Math.min(100, Math.round((filled / total) * 100));
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+document.querySelectorAll('.q-input').forEach(i => i.addEventListener('input', updateProgress));
+
+// ── COMPILE ANSWERS ─────────────────────────────────────────────────────────
+function compilarRespuestas() {
+  const lines = ['🏄‍♀️ *SUSAN TRAJES DE BAÑO — Respuestas al diagnóstico*', ''];
+
+  const sections = [
+    { id: 's1', title: '📦 PRODUCTO' },
+    { id: 's2', title: '🏭 PRODUCCIÓN' },
+    { id: 's3', title: '💰 VENTAS' },
+    { id: 's4', title: '🎨 MARCA' },
+    { id: 's5', title: '📱 PRESENCIA DIGITAL' },
+  ];
+
+  sections.forEach(s => {
+    const sec = document.getElementById(s.id);
+    lines.push('*' + s.title + '*');
+
+    // Radio buttons
+    sec.querySelectorAll('[data-type=radio]').forEach(grid => {
+      const checked = grid.querySelector('input:checked');
+      const label = grid.closest('.question').querySelector('.q-label').textContent.trim();
+      lines.push('• ' + label.replace(/^[•▾\s]+/, '') + ': ' + (checked ? checked.value : 'Sin responder'));
+    });
+
+    // Checkboxes
+    sec.querySelectorAll('[data-type=checkbox]').forEach(grid => {
+      const checked = Array.from(grid.querySelectorAll('input:checked')).map(i => i.value);
+      const label = grid.closest('.question').querySelector('.q-label').textContent.trim();
+      lines.push('• ' + label.replace(/^[•▾\s]+/, '') + ': ' + (checked.length ? checked.join(', ') : 'Sin responder'));
+    });
+
+    // Text inputs
+    sec.querySelectorAll('.q-input').forEach(inp => {
+      if (inp.value.trim()) {
+        lines.push('• ' + (inp.placeholder || inp.dataset.name) + ': ' + inp.value.trim());
+      }
+    });
+
+    lines.push('');
+  });
+
+  lines.push('_Enviado desde la propuesta digital de PRDR Comunicación Estratégica_');
+  return lines.join('\n');
+}
+
+// ── SEND VIA WHATSAPP ───────────────────────────────────────────────────────
+function enviarWP() {
+  const texto = compilarRespuestas();
+  const phone = '5493404504450'; // Diego's number
+  const url = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(texto);
+  window.open(url, '_blank');
+}
+
+// ── COPY TO CLIPBOARD ───────────────────────────────────────────────────────
+function copiarRespuestas() {
+  const texto = compilarRespuestas();
+  navigator.clipboard.writeText(texto).then(() => {
+    const el = document.getElementById('copySuccess');
+    el.style.display = 'block';
+    setTimeout(() => { el.style.display = 'none'; }, 3000);
+  }).catch(() => {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = texto;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    const el = document.getElementById('copySuccess');
+    el.style.display = 'block';
+    setTimeout(() => { el.style.display = 'none'; }, 3000);
+  });
+}
+</script>
+
+</body>
+</html>
